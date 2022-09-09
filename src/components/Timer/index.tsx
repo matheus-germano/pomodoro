@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { VscDebugRestart } from 'react-icons/vsc';
 import { IoPlay } from 'react-icons/io5';
+import { BsFillPauseFill } from 'react-icons/bs';
 
 import { TimerContainer, TimerWrapper, TimerDisplay, TimerControllers } from './styles';
 
@@ -10,11 +11,16 @@ const REST_TIMER_SECONDS = 5 * 60; //5 minutes
 export function Timer() {
   const [secondsAmount, setSecondsAmount] = useState(INITIAL_TIMER_SECONDS);
   const [isRestTime, setIsRestTime] = useState(false);
+  const [isTimerPaused, setIsTimerPaused] = useState(false);
 
   let minutes = Math.floor(secondsAmount / 60);
   let seconds = secondsAmount % 60;
 
   useEffect(() => {
+    if (isTimerPaused) {
+      return;
+    }
+
     if (secondsAmount > 0) {
       setTimeout(() => {
         setSecondsAmount(prev => prev - 1);
@@ -26,10 +32,14 @@ export function Timer() {
       setIsRestTime(true);
       setSecondsAmount(REST_TIMER_SECONDS);
     }
-  }, [secondsAmount]);
+  }, [secondsAmount, isTimerPaused]);
 
-  function restartTimer() {
+  function handleRestartTimer() {
     setSecondsAmount(INITIAL_TIMER_SECONDS);
+  }
+
+  function handlePauseTimer() {
+    setIsTimerPaused(!isTimerPaused);
   }
 
   return (
@@ -42,8 +52,8 @@ export function Timer() {
           <span>{String(seconds).padStart(2, '0')}</span>
         </TimerDisplay>
         <TimerControllers>
-          <button><IoPlay size={20} /></button>
-          <button><VscDebugRestart size={20} /></button>
+          <button onClick={handlePauseTimer}>{isTimerPaused ? <IoPlay size={20} /> : <BsFillPauseFill size={20} />}</button>
+          <button onClick={handleRestartTimer}><VscDebugRestart size={20} /></button>
         </TimerControllers>
       </TimerWrapper>
     </TimerContainer>
