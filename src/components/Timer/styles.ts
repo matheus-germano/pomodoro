@@ -11,15 +11,31 @@ export const TimerContainer = styled.div`
   justify-content: center;
 
   margin: 0 auto;
+  gap: 2rem;
 `;
 
-export const TimerView = styled.div`
+export const TimerDisplay = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
   
   span {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
     font-size: 6rem;
-    font-weight: 900;
+
+    &:first-child, &:last-child {
+      background: var(--gray-800);
+
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 900;
+      line-height: 1.6;
+    }
   }
 `;
 
