@@ -14,6 +14,14 @@ export const TimerContainer = styled.div`
   gap: 2rem;
 `;
 
+export const TimerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+`;
+
 export const TimerDisplay = styled.div`
   display: flex;
   align-items: center;
@@ -39,4 +47,30 @@ export const TimerDisplay = styled.div`
   }
 `;
 
-export const TimerControllers = styled.div``;
+export const TimerControllers = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  button {
+    width: 100%;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: var(--purple-500);
+    color: var(--gray-100);
+
+    transition: background 0.2s;
+
+    &:hover {
+      background: var(--purple-700);
+    }
+  }
+`;
