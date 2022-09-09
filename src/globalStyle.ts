@@ -29,6 +29,23 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
+  
+  input,
+  button,
+  textarea,
+  select {
+    outline: none;
+    border: none;
+  }
+
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 700;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+
   body,
   input,
   textarea,
