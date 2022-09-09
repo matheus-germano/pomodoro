@@ -1,5 +1,45 @@
+import { useEffect, useState } from 'react';
+
+import { TimerContainer, TimerView, TimerControllers } from './styles';
+
+const INITIAL_TIMER_SECONDS = 25 * 60; //25 minutes
+const REST_TIMER_SECONDS = 5 * 60; //5 minutes
+
 export function Timer() {
+  const [secondsAmount, setSecondsAmount] = useState(INITIAL_TIMER_SECONDS);
+  const [isRestTime, setIsRestTime] = useState(false);
+
+  let minutes = Math.floor(secondsAmount / 60);
+  let seconds = secondsAmount % 60;
+
+  useEffect(() => {
+    if (secondsAmount > 0) {
+      setTimeout(() => {
+        setSecondsAmount(prev => prev - 1);
+      }, 1000);
+    } else if (isRestTime) {
+      setIsRestTime(false);
+      setSecondsAmount(INITIAL_TIMER_SECONDS);
+    } else {
+      setIsRestTime(true);
+      setSecondsAmount(REST_TIMER_SECONDS);
+    }
+  }, [secondsAmount]);
+
+  function restartTimer() {
+    setSecondsAmount(INITIAL_TIMER_SECONDS);
+  }
+
   return (
-    <h1>Timer</h1>
+    <TimerContainer>
+      <TimerView>
+        <span>{String(minutes).padStart(2, '0')}</span>
+        <span>:</span>
+        <span>{String(seconds).padStart(2, '0')}</span>
+      </TimerView>
+      <TimerControllers>
+
+      </TimerControllers>
+    </TimerContainer>
   );
 }
