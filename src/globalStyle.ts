@@ -27,6 +27,8 @@ export const GlobalStyle = createGlobalStyle`
     background: var(--gray-900);
     color: var(--gray-300);
     -webkit-font-smoothing: antialiased;
+
+    transition: background .2s, color .2s;
   }
 
   
