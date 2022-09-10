@@ -5,11 +5,11 @@ import { BsFillPauseFill } from 'react-icons/bs';
 
 import { TimerContainer, TimerWrapper, TimerDisplay, TimerControllers } from './styles';
 
-const INITIAL_TIMER_SECONDS = 1 * 60; //25 minutes
+const INITIAL_TIMER_SECONDS = 25 * 60; //25 minutes
 const REST_TIMER_SECONDS = 5 * 60; //5 minutes
 
 export function Timer() {
-  const [secondsAmount, setSecondsAmount] = useState(5);
+  const [secondsAmount, setSecondsAmount] = useState(INITIAL_TIMER_SECONDS);
   const [isRestTime, setIsRestTime] = useState(false);
   const [isTimerPaused, setIsTimerPaused] = useState(true);
 
@@ -19,9 +19,7 @@ export function Timer() {
   let minutes = Math.floor(secondsAmount / 60);
   let seconds = secondsAmount % 60;
 
-  useEffect(() => {
-    Notification.requestPermission();
-  }, []);
+  Notification.requestPermission();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -32,10 +30,12 @@ export function Timer() {
       if (secondsAmount > 0) {
         setSecondsAmount(prev => prev - 1);
       } else if (isRestTimeRef.current) {
-        setIsRestTime(false);
+        isRestTimeRef.current = false;
+        setIsRestTime(isRestTimeRef.current);
         setSecondsAmount(INITIAL_TIMER_SECONDS);
       } else {
-        setIsRestTime(true);
+        isRestTimeRef.current = true;
+        setIsRestTime(isRestTimeRef.current);
         setSecondsAmount(REST_TIMER_SECONDS);
       }
     }, 1000);
