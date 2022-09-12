@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Timer } from './components/Timer'
+import { Router } from './router'
 import { GlobalStyle } from './globalStyle'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Timer />
+      <Router />
     </>
   )
 }
