@@ -1,8 +1,9 @@
 import { BsArrowLeftShort } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+
 import { RangeInput } from "../../components/RangeInput";
 
-import { SettingsContainer, PageTitle, TimeChanger } from "./styles";
+import { PageTitle, SettingsContainer, TimeChanger } from "./styles";
 
 export function Settings() {
   const navigate = useNavigate();
