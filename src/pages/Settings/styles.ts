@@ -36,5 +36,14 @@ export const TimeChanger = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
+
+  margin: 0 auto;
+`;
+
+export const Row = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
