@@ -3,13 +3,14 @@ import { VscDebugRestart } from 'react-icons/vsc';
 import { IoPlay } from 'react-icons/io5';
 import { BsFillPauseFill } from 'react-icons/bs';
 
+import { useTimer } from '../../hooks/useTimer';
+
 import { TimerContainer, TimerWrapper, TimerDisplay, TimerControllers } from './styles';
 
-const INITIAL_TIMER_SECONDS = 25 * 60; //25 minutes
-const REST_TIMER_SECONDS = 5 * 60; //5 minutes
-
 export function Timer() {
-  const [secondsAmount, setSecondsAmount] = useState(INITIAL_TIMER_SECONDS);
+  const { workTime, restTime } = useTimer();
+
+  const [secondsAmount, setSecondsAmount] = useState(workTime);
   const [isRestTime, setIsRestTime] = useState(false);
   const [isTimerPaused, setIsTimerPaused] = useState(true);
 
@@ -32,11 +33,11 @@ export function Timer() {
       } else if (isRestTimeRef.current) {
         isRestTimeRef.current = false;
         setIsRestTime(isRestTimeRef.current);
-        setSecondsAmount(INITIAL_TIMER_SECONDS);
+        setSecondsAmount(workTime);
       } else {
         isRestTimeRef.current = true;
         setIsRestTime(isRestTimeRef.current);
-        setSecondsAmount(REST_TIMER_SECONDS);
+        setSecondsAmount(restTime);
       }
     }, 1000);
 
@@ -44,7 +45,7 @@ export function Timer() {
   }, [secondsAmount, isTimerPausedRef.current]);
 
   function handleRestartTimer() {
-    setSecondsAmount(INITIAL_TIMER_SECONDS);
+    setSecondsAmount(workTime);
   }
 
   function handlePauseTimer() {
