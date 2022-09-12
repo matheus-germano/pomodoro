@@ -45,7 +45,7 @@ export function Timer() {
   }, [secondsAmount, isTimerPausedRef.current]);
 
   function handleRestartTimer() {
-    setSecondsAmount(workTime);
+    setSecondsAmount(isRestTimeRef.current ? restTime : workTime);
   }
 
   function handlePauseTimer() {
