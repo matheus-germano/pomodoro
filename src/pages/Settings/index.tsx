@@ -3,14 +3,13 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import { RangeInput } from "../../components/RangeInput";
+import { useTimer } from "../../hooks/useTimer";
 
 import { PageTitle, Row, SettingsContainer, TimeChanger } from "./styles";
 
 export function Settings() {
+  const { workTime, setWorkTime, restTime, setRestTime } = useTimer();
   const navigate = useNavigate();
-
-  const [workTime, setWorkTime] = useState(25 * 60);
-  const [restTime, setRestTime] = useState(5 * 60);
 
   return (
     <SettingsContainer>
