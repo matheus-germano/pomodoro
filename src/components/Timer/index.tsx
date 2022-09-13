@@ -20,7 +20,17 @@ export function Timer() {
   let minutes = Math.floor(secondsAmount / 60);
   let seconds = secondsAmount % 60;
 
-  Notification.requestPermission();
+  function sendWorkFinishedNotification() {
+    const notification = new Notification("Your work time finished!", {
+      body: "Let's take a break and get ready for the next cycle!"
+    })
+  }
+
+  function sendBreakFinishedNotification() {
+    const notification = new Notification("Your break time finished!", {
+      body: "Let's get back to the hard work!"
+    })
+  }
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -34,10 +44,32 @@ export function Timer() {
         isRestTimeRef.current = false;
         setIsRestTime(isRestTimeRef.current);
         setSecondsAmount(workTime);
+
+        if (Notification.permission === "granted") {
+          sendBreakFinishedNotification();
+        } else if (Notification.permission === "denied") {
+          Notification.requestPermission()
+            .then((permission) => {
+              if (permission === "granted") {
+                sendBreakFinishedNotification();
+              }
+            });
+        }
       } else {
         isRestTimeRef.current = true;
         setIsRestTime(isRestTimeRef.current);
         setSecondsAmount(restTime);
+
+        if (Notification.permission === "granted") {
+          sendWorkFinishedNotification();
+        } else if (Notification.permission === "denied") {
+          Notification.requestPermission()
+            .then((permission) => {
+              if (permission === "granted") {
+                sendWorkFinishedNotification();
+              }
+            });
+        }
       }
     }, 1000);
 
